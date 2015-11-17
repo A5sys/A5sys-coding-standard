@@ -1,7 +1,5 @@
 # A5sys PHP CodeSniffer Coding Standard
 
-A coding standard to check against the [Symfony coding standards](http://symfony.com/doc/current/contributing/code/standards.html), originally shamelessly copied from the -disappeared- opensky/A5sys-coding-standard repository.
-
 ## Installation
 
 ### Composer
@@ -18,7 +16,7 @@ This standard can be installed with the [Composer](https://getcomposer.org/) dep
 
         vendor/bin/phpcs --config-set installed_paths vendor/A5sys/A5sys-coding-standard
 
-4. Check the installed coding standards for "Symfony2"
+4. Check the installed coding standards for "A5sys"
 
         vendor/bin/phpcs -i
 
@@ -38,9 +36,9 @@ This standard can be installed with the [Composer](https://getcomposer.org/) dep
 
         phpcs --config-set installed_paths /path/to/A5sys-coding-standards
 
-   Or copy/symlink this repository's "Symfony2"-folder inside the phpcs `Standards` directory
+   Or copy/symlink this repository's "A5sys"-folder inside the phpcs `Standards` directory
 
-4. Check the installed coding standards for "Symfony2"
+4. Check the installed coding standards for "A5sys"
 
         phpcs -i
 
