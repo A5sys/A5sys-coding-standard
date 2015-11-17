@@ -10,7 +10,7 @@ This standard can be installed with the [Composer](https://getcomposer.org/) dep
 
 2. Install the coding standard as a dependency of your project
 
-        composer require --dev A5sys/A5sys-coding-standard:~2.0
+        composer require --dev A5sys/A5sys-coding-standard
 
 3. Add the coding standard to the PHP_CodeSniffer install path
 
