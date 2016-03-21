@@ -22,7 +22,7 @@ if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false)
  *
  * Verifies that :
  * <ul>
- *  <li>There is a &#64;return tag if a return statement exists inside the method</li>
+ *  <li>There is a phpdoc comment on each function. Applies to public, protected and private methods.</li>
  * </ul>
  *
  * @category PHP
@@ -51,16 +51,6 @@ class A5sys_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commentin
 
         $tokens = $phpcsFile->getTokens();
         $code = $tokens[$commentEnd]['code'];
-
-        // a comment is not required on protected/private methods
-        $method = $phpcsFile->getMethodProperties($stackPtr);
-        $commentRequired = 'public' == $method['scope'];
-
-        if (($code === T_COMMENT && !$commentRequired)
-            || ($code !== T_DOC_COMMENT && !$commentRequired)
-        ) {
-            return;
-        }
 
         parent::process($phpcsFile, $stackPtr);
     }
