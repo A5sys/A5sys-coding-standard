@@ -57,6 +57,12 @@ class A5sys_Sniffs_Formatting_LocalVariableImmediatelyReturnedSniff implements P
     {
         $tokens = $phpcsFile->getTokens();
 
+        $isThrow = false;
+
+        if ($tokens[$stackPtr]['type'] === 'T_THROW') {
+            $isThrow = true;
+        }
+
         //if the return is a variable
         $functionEnd = false;
         $current = $stackPtr + 1;
@@ -106,6 +112,13 @@ class A5sys_Sniffs_Formatting_LocalVariableImmediatelyReturnedSniff implements P
                 }
                 if ($tokens[$current]['type'] === 'T_VARIABLE'  && $returnedName === $tokens[$current]['content']) {
                     $inPreviousLine = true;
+                }
+
+                //the rule does not apply in a catch
+                if ($isThrow && $tokens[$current]['type'] === 'T_CATCH') {
+                    $inPreviousLine = false;
+                    //set to 2 to break the loop
+                    $semicolonFound = 2;                    
                 }
                 $current--;
             }
