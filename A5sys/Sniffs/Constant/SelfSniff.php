@@ -15,7 +15,8 @@
 /**
  * A5sys_Sniffs_Constant_SelfSniff.
  *
- * Throws warnings if the self is used instead of static
+ * Throws error if the self is used instead of static,
+ * unless the self is into the method signature (static causes compilation error in signature)
  *
  * @category PHP
  * @package  PHP_CodeSniffer-Symfony2
@@ -42,7 +43,6 @@ class A5sys_Sniffs_Constant_SelfSniff implements PHP_CodeSniffer_Sniff
     public function register()
     {
         return array(T_SELF);
-
     }//end register()
 
     /**
@@ -56,12 +56,38 @@ class A5sys_Sniffs_Constant_SelfSniff implements PHP_CodeSniffer_Sniff
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
-        $phpcsFile->addError(
-           'Please use STATIC instead of SELF',
-            $stackPtr,
-            'Invalid'
-        );
+        $tokens = $phpcsFile->getTokens();
+
+        $openParenthesisPtr = null;
+        $closeParenthesisPtr = null;
+        $openParenthesisOwner = null;
+        if (isset($tokens[$stackPtr]['nested_parenthesis'])) {
+            $openParenthesisPtr = array_keys($tokens[$stackPtr]['nested_parenthesis'])[0];
+            $openParenthesisToken = $tokens[array_keys($tokens[$stackPtr]['nested_parenthesis'])[0]];
+            $closeParenthesisPtr = $openParenthesisToken['parenthesis_closer'];
+
+            if (isset($openParenthesisToken['parenthesis_owner'])) {
+                $openParenthesisOwner = $tokens[$openParenthesisToken['parenthesis_owner']];
+            }
+        }
+
+        $addError = true;
+        // if self is into the method signature, don't add the error
+        if ($openParenthesisPtr
+                && $closeParenthesisPtr
+                // between "(" and ")"
+                && $openParenthesisPtr < $stackPtr && $closeParenthesisPtr > $stackPtr
+                // owner of "(" is a T_FUNCTION
+                && $openParenthesisOwner['code'] === T_FUNCTION) {
+            $addError = false;
+        }
+
+        if ($addError) {
+            $phpcsFile->addError(
+                'Please use STATIC instead of SELF',
+                $stackPtr,
+                'Invalid'
+            );
+        }
     }//end process()
-
 }//end class
-
