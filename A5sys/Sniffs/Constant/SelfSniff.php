@@ -71,7 +71,7 @@ class A5sys_Sniffs_Constant_SelfSniff implements PHP_CodeSniffer_Sniff
             }
         }
 
-        $addError = true;
+        $addWarning = true;
         // if self is into the method signature, don't add the error
         if ($openParenthesisPtr
                 && $closeParenthesisPtr
@@ -79,11 +79,11 @@ class A5sys_Sniffs_Constant_SelfSniff implements PHP_CodeSniffer_Sniff
                 && $openParenthesisPtr < $stackPtr && $closeParenthesisPtr > $stackPtr
                 // owner of "(" is a T_FUNCTION
                 && $openParenthesisOwner['code'] === T_FUNCTION) {
-            $addError = false;
+            $addWarning = false;
         }
 
-        if ($addError) {
-            $phpcsFile->addError(
+        if ($addWarning) {
+            $phpcsFile->addWarning(
                 'Please use STATIC instead of SELF',
                 $stackPtr,
                 'Invalid'
