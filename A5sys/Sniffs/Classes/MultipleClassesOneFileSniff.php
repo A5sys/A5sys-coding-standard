@@ -84,7 +84,8 @@ class A5sys_Sniffs_Classes_MultipleClassesOneFileSniff implements Sniff
         if ($this->classCount > 1) {
             $phpcsFile->addError(
                 'Multiple classes defined in a single file',
-                $stackPtr
+                $stackPtr,
+                'MultipleClassesOneFile'
             );
         }
 

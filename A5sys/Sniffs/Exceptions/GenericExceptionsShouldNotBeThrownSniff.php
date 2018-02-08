@@ -65,7 +65,8 @@ class A5sys_Sniffs_Exceptions_GenericExceptionsShouldNotBeThrownSniff implements
         if (in_array($tokens[$exceptionClass]['content'], array('ErrorException', 'RuntimeException', 'Exception'))) {
             $phpcsFile->addError(
                 'Generic exceptions ErrorException, RuntimeException and Exception should not be thrown',
-                $stackPtr
+                $stackPtr,
+                'GenericExceptionsShouldNotBeThrown'
             );
         }
 

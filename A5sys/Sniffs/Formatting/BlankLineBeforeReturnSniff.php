@@ -86,7 +86,8 @@ class A5sys_Sniffs_Formatting_BlankLineBeforeReturnSniff implements Sniff
         } else if (count($prevLineTokens) > 0) {
             $phpcsFile->addError(
                 'Missing blank line before return statement',
-                $stackPtr
+                $stackPtr,
+                'BlankLineBeforeReturn'
             );
         }
 

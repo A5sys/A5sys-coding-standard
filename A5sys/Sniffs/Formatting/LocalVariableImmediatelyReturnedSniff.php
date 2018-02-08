@@ -130,7 +130,8 @@ class A5sys_Sniffs_Formatting_LocalVariableImmediatelyReturnedSniff implements S
         if ($returnedName !== null && $count === 1 && $inPreviousLine === true) {
             $phpcsFile->addError(
                 'Local variables should not be declared and then immediately returned or thrown',
-                $stackPtr
+                $stackPtr,
+                'LocalVariableImmediatelyReturned'
             );
         }
 
