@@ -13,6 +13,9 @@
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
 
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * A5sys_Sniffs_WhiteSpace_BinaryOperatorSpacingSniff.
  *
@@ -42,20 +45,20 @@ class A5sys_Sniffs_WhiteSpace_BinaryOperatorSpacingSniff
      */
     public function register()
     {
-        return PHP_CodeSniffer_Tokens::$comparisonTokens;
+        return Tokens::$comparisonTokens;
 
     }//end register()
 
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                  $stackPtr  The position of the current token
      *                                        in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

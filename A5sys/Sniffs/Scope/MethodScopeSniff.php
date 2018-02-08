@@ -14,10 +14,9 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractScopeSniff not found');
-}
-
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
 /**
  * Verifies that class members have scope modifiers.
  *
@@ -30,7 +29,7 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false
  * @version   Release: 1.3.0
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class A5sys_Sniffs_Scope_MethodScopeSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
+class A5sys_Sniffs_Scope_MethodScopeSniff extends AbstractScopeSniff
 {
     /**
      * Constructs a A5sys_Sniffs_Scope_MethodScopeSniff.
@@ -44,13 +43,13 @@ class A5sys_Sniffs_Scope_MethodScopeSniff extends PHP_CodeSniffer_Standards_Abst
     /**
      * Processes the function tokens within the class.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
      * @param int                  $stackPtr  The position where the token was found.
      * @param int                  $currScope The current scope opener token.
      *
      * @return void
      */
-    protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope(PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $currScope)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -60,7 +59,7 @@ class A5sys_Sniffs_Scope_MethodScopeSniff extends PHP_CodeSniffer_Standards_Abst
             return;
         }
 
-        $modifier = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$scopeModifiers, $stackPtr);
+        $modifier = $phpcsFile->findPrevious(Tokens::$scopeModifiers, $stackPtr);
         if (($modifier === false) || ($tokens[$modifier]['line'] !== $tokens[$stackPtr]['line'])) {
             $error = 'No scope modifier specified for function "%s"';
             $data  = array($methodName);
@@ -68,4 +67,18 @@ class A5sys_Sniffs_Scope_MethodScopeSniff extends PHP_CodeSniffer_Standards_Abst
         }
 
     }//end processTokenWithinScope()
+
+    /**
+     * Processes a token that is found within the scope that this test is
+     * listening to.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
+     * @param int                         $stackPtr  The position in the stack where this
+     *                                               token was found.
+     *
+     * @return void
+     */
+    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    {
+    }//end processTokenOutsideScope()    
 }//end class

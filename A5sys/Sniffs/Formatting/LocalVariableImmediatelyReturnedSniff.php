@@ -12,6 +12,8 @@
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
 
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * A5sys_Sniffs_Constant_SelfSniff.
  *
@@ -23,7 +25,7 @@
  * @license  http://spdx.org/licenses/MIT MIT License
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
-class A5sys_Sniffs_Formatting_LocalVariableImmediatelyReturnedSniff implements PHP_CodeSniffer_Sniff
+class A5sys_Sniffs_Formatting_LocalVariableImmediatelyReturnedSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -47,13 +49,13 @@ class A5sys_Sniffs_Formatting_LocalVariableImmediatelyReturnedSniff implements P
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                  $stackPtr  The position of the current token
      *                                        in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

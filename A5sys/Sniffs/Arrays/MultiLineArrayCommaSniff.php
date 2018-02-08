@@ -12,6 +12,8 @@
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
 
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * A5sys_Sniffs_WhiteSpace_MultiLineArrayCommaSniff.
  *
@@ -25,7 +27,7 @@
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
 class A5sys_Sniffs_Arrays_MultiLineArrayCommaSniff
-    implements PHP_CodeSniffer_Sniff
+    implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -59,7 +61,7 @@ class A5sys_Sniffs_Arrays_MultiLineArrayCommaSniff
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $open   = $tokens[$stackPtr];
