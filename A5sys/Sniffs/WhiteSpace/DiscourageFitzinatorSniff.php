@@ -73,7 +73,7 @@ class A5sys_Sniffs_WhiteSpace_DiscourageFitzinatorSniff implements Sniff
 
         if (strpos($tokens[$stackPtr]['content'], "\n") > 0 || strpos($tokens[$stackPtr]['content'], "\r") > 0) {
             $warning = 'Please trim any trailing whitespace';
-            $phpcsFile->addWarning($warning, $stackPtr);
+            $phpcsFile->addWarning($warning, $stackPtr, 'TrailingWhitespace');
         }
 
     }
