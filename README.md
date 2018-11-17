@@ -1,5 +1,9 @@
 # A5sys PHP CodeSniffer Coding Standard
 
+## Requirements
+
+**This standard requires phpcs version 3. It does not work with version 2.**
+
 ## Installation
 
 ### Composer
@@ -28,7 +32,7 @@ This standard can be installed with the [Composer](https://getcomposer.org/) dep
 
 1. Install [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 
-2. Checkout this repository 
+2. Checkout this repository
 
         git clone git://github.com/A5sys/A5sys-coding-standard.git
 
